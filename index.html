@@ -1,17 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>MLU</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>MLU — FYP</title>
 <style>
-body{
-background:black;
-color:blue;
-font-family:Arial;
-text-align:center;
-}
-h1{
-font-size:60px;
-}
-button{
-background:#222;
-color:blue
+*{box-sizing:border-box}body{margin:0;background:#08090b;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;display:flex;justify-content:center;min-height:100vh}
+.phone{width:min(100vw,430px);height:100vh;background:#050608;position:relative;overflow:hidden}
+.top{position:absolute;z-index:5;top:0;left:0;right:0;padding:18px 18px 12px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(#050608cc,transparent)}
+.logo{font-weight:800;font-size:25px;letter-spacing:-1px}.icon{font-size:23px}
+.feed{height:100%;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none}.feed::-webkit-scrollbar{display:none}
+.video{height:100%;min-height:100%;scroll-snap-align:start;position:relative;display:flex;align-items:flex-end;background-size:cover;background-position:center}
+.video:nth-child(1){background:linear-gradient(145deg,#172238,#050609 65%,#102f43)}
+.video:nth-child(2){background:linear-gradient(145deg,#32151d,#08090b 60%,#512d14)}
+.video:nth-child(3){background:linear-gradient(145deg,#15152e,#08090b 60%,#172e20)}
+.video:nth-child(4){background:linear-gradient(145deg,#321d3c,#09080d 65%,#152f46)}
+.video:nth-child(5){background:linear-gradient(145deg,#183d39,#050809 65%,#312015)}
+.fake-content{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:76px;opacity:.18}
+.info{padding:0 22px 86px 18px;text-shadow:0 2px 10px #000;max-width:85%}.user{font-weight:800;font-size:16px}.caption{font-size:15px;margin-top:7px}.sound{font-size:13px;margin-top:9px;opacity:.9}
+.actions{position:absolute;right:13px;bottom:95px;display:flex;flex-direction:column;gap:20px;align-items:center}.action{font-size:24px;text-align:center}.action small{display:block;font-size:11px;margin-top:3px}
+.nav{position:absolute;z-index:10;bottom:0;left:0;right:0;height:67px;background:#07080add;backdrop-filter:blur(12px);display:flex;justify-content:space-around;align-items:center;border-top:1px solid #ffffff12}.nav button{border:0;background:none;color:#aaa;font-size:9px;display:flex;flex-direction:column;align-items:center;gap:5px}.nav button.active{color:#fff}.nav span{font-size:20px}
+.panel{position:absolute;z-index:20;inset:0;background:#090a0d;transform:translateX(100%);transition:.25s;padding:70px 20px 80px;overflow:auto}.panel.open{transform:translateX(0)}.panel h1{margin:0 0 20px}.card{background:#15171c;border-radius:18px;padding:17px;margin:12px 0}.close{position:absolute;top:18px;left:18px;background:none;color:#fff;border:0;font-size:25px}
+.search{width:100%;padding:14px;border-radius:14px;border:1px solid #292c34;background:#15171c;color:white;font-size:16px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="top"><button class="icon" onclick="openPanel('profile')">♙</button><div class="logo">mlu</div><button class="icon" onclick="openPanel('search')">⌕</button></div>
+
+  <main class="feed" id="feed">
+    <section class="video"><div class="fake-content">🌃</div><div class="info"><div class="user">@nightvibes</div><div class="caption">city nights just hit different ✨ #fyp #night</div><div class="sound">♫ original sound — nightvibes</div></div><div class="actions"><div class="action">↗<small>share</small></div><div class="action">♡<small>save</small></div></div></section>
+    <section class="video"><div class="fake-content">⚽</div><div class="info"><div class="user">@football.edits</div><div class="caption">THE GOAT 🐐🔥 #football #edit</div><div class="sound">♫ stadium edit audio</div></div><div class="actions"><div class="action">↗<small>share</small></div><div class="action">♡<small>save</small></div></div></section>
+    <section class="video"><div class="fake-content">🎮</div><div class="info"><div class="user">@gamingzone</div><div class="caption">when the clutch actually works 😭🎮</div><div class="sound">♫ original sound — gamingzone</div></div><div class="actions"><div class="action">↗<small>share</small></div><div class="action">♡<small>save</small></div></div></section>
+    <section class="video"><div class="fake-content">🎧</div><div class="info"><div class="user">@musicdaily</div><div class="caption">this song has been stuck in my head all day 🎶</div><div class="sound">♫ trending audio</div></div><div class="actions"><div class="action">↗<small>share</small></div><div class="action">♡<small>save</small></div></div></section>
+    <section class="video"><div class="fake-content">🐈</div><div class="info"><div class="user">@randomthings</div><div class="caption">the internet is a strange place 💀</div><div class="sound">♫ original sound</div></div><div class="actions"><div class="action">↗<small>share</small></div><div class="action">♡<small>save</small></div></div></section>
+  </main>
+
+  <nav class="nav">
+    <button onclick="openPanel('fitness')"><span>🏋️</span>Fitness</button>
+    <button onclick="openPanel('music')"><span>🎵</span>Music</button>
+    <button class="active" onclick="closePanel()"><span>⌂</span>Home</button>
+    <button onclick="openPanel('chat')"><span>💬</span>Chat</button>
+    <button onclick="openPanel('ai')"><span>🤖</span>MB AI</button>
+    <button onclick="openPanel('movies')"><span>🎬</span>MLU<span style="font-size:8px">vies</span></button>
+  </nav>
+
+  <section class="panel" id="search"><button class="close" onclick="closePanel()">‹</button><h1>Search</h1><input class="search" placeholder="Search videos, accounts..."><div class="card">🔥 trending now</div><div class="card">⚽ football</div><div class="card">🎮 gaming</div><div class="card">😂 funny videos</div></section>
+  <section class="panel" id="profile"><button class="close" onclick="closePanel()">‹</button><h1>Your profile</h1><div class="card"><h2>@mlu_user</h2><p>Welcome to MLU 🖤</p></div></section>
+  <section class="panel" id="fitness"><button class="close" onclick="closePanel()">‹</button><h1>Fitness</h1><div class="card">💪 Workouts</div><div class="card">🔥 Challenges</div><div class="card">📈 Progress</div></section>
+  <section class="panel" id="music"><button class="close" onclick="closePanel()">‹</button><h1>Music</h1><div class="card">🎧 Trending now</div><div class="card">🎵 Your playlists</div><div class="card">⭐ Artists</div></section>
+  <section class="panel" id="chat"><button class="close" onclick="closePanel()">‹</button><h1>Chat</h1><div class="card">💬 Start a conversation</div><div class="card">📌 Saved messages</div></section>
+  <section class="panel" id="ai"><button class="close" onclick="closePanel()">‹</button><h1>MB AI</h1><div class="card">🤖 Ask anything</div><div class="card">✨ Be creative</div><div class="card">🧠 Get help</div></section>
+  <section class="panel" id="movies"><button class="close" onclick="closePanel()">‹</button><h1>MLUvies</h1><div class="card">🔥 Trending movies</div><div class="card">🎬 Your watchlist</div><div class="card">🍿 Movie time</div></section>
+</div>
+<script>
+function openPanel(id){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'));document.getElementById(id).classList.add('open')}
+function closePanel(){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('open'))}
+</script>
+</body>
+</html>
